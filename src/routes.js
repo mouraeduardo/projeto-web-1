@@ -10,7 +10,7 @@ routes.get('/home', function(req, res) {
 });
 
 // routes view
-routes.get('/login', async (req, res) => {
+routes.get('/teste', async (req, res) => {
     res.render('../views/login')
   });
 
@@ -25,6 +25,7 @@ routes.get('/', async (req, res) => {
 
 // routes user
 routes.get('/users', UserController.index);
+routes.post('/login', UserController.login);
 routes.post('/create-user', UserController.createUser);
 routes.put('/update-user', UserController.updateUser);
 routes.delete('/delete-user/:_id', UserController.deleteUser);

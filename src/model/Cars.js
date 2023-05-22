@@ -6,7 +6,8 @@ const DataSchama = new mongoose.Schema({
     brand: String,
     color: String,
     price: String,
-    daily: String
+    daily: String,
+    available: Boolean
 
 })
 

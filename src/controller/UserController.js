@@ -1,4 +1,4 @@
-const User = require('../model/User.js')
+const User = require('../model/User')
 
 module.exports = {
     async index(req, res){
@@ -6,9 +6,31 @@ module.exports = {
         res.json(user)
     },
 
+    async login(req, res){
+        const {email, password} = req.body;
+        const user = await User.find({ email: email});
+
+        console.log(req.body)
+
+        if(user != null && user[0].password == password){
+            res.redirect('/')
+        } else{
+            res.json({message: "Usuário não encontrado"}) 
+        }
+    },
+
     async createUser(req, res){
         
         const {name, email, password} = req.body;
+
+        const existUser = await User.find({ email: email});
+
+        if(existUser != null){
+            res.json({message: "Email já em uso"}) 
+        }
+        
+        console.log(req.body)
+        console.log(name, email, password)
 
         let dataCreate = {}
 

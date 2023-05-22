@@ -7,7 +7,7 @@ module.exports ={
     },
 
     async addCars(req, res){
-        const { photo, name, brand, color, price, daily } = req.body 
+        const { photo, name, brand, color, price, daily, available } = req.body 
         
         dataCreate = {
             photo, 
@@ -15,7 +15,8 @@ module.exports ={
             brand, 
             color, 
             price, 
-            daily
+            daily,
+            available
         }
 
         const car = await Car.create(dataCreate);
