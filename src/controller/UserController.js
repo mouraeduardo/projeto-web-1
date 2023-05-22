@@ -1,6 +1,7 @@
 const User = require('../model/User')
 
 module.exports = {
+
     async index(req, res){
         const user = await User.find();
         res.json(user)
@@ -10,9 +11,9 @@ module.exports = {
         const {email, password} = req.body;
         const user = await User.find({ email: email});
 
-        console.log(req.body)
+        console.log(user)
 
-        if(user != null && user[0].password == password){
+        if(user.length !== 0){
             res.redirect('/')
         } else{
             res.json({message: "Usuário não encontrado"}) 
@@ -21,25 +22,28 @@ module.exports = {
 
     async createUser(req, res){
         
-        const {name, email, password} = req.body;
+        const {name, email, password, confirmPassword, birthData, tellphone, genus} = req.body;
+
+        console.log(name, email, password, confirmPassword, birthData, tellphone, genus);
+
+        if (password !== confirmPassword) {
+            res.json({message: "senhas não conferem"}) 
+        }
 
         const existUser = await User.find({ email: email});
 
-        if(existUser != null){
+        if(existUser === null){
             res.json({message: "Email já em uso"}) 
         }
-        
-        console.log(req.body)
-        console.log(name, email, password)
 
         let dataCreate = {}
 
         dataCreate = {
-            name, email, password
+            name, email, password, birthData, tellphone, genus
         }
 
         const user = await User.create(dataCreate);
-        res.json(user)
+        res.redirect('/login')
     },
 
     async updateUser(req, res){

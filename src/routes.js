@@ -5,12 +5,14 @@ const CarController = require("./controller/CarController")
 
 const routes = express.Router();
 
-routes.get('/home', function(req, res) {
-    res.json({ message: "teste, funciona"})
-});
 
 // routes view
-routes.get('/teste', async (req, res) => {
+
+routes.get('/signup', function(req, res) {
+  res.render('../views/registerUser')
+});
+
+routes.get('/login', async (req, res) => {
     res.render('../views/login')
   });
 
@@ -25,7 +27,7 @@ routes.get('/', async (req, res) => {
 
 // routes user
 routes.get('/users', UserController.index);
-routes.post('/login', UserController.login);
+routes.post('/login-user', UserController.login);
 routes.post('/create-user', UserController.createUser);
 routes.put('/update-user', UserController.updateUser);
 routes.delete('/delete-user/:_id', UserController.deleteUser);
