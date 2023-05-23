@@ -7,6 +7,14 @@ module.exports = {
         res.json(user)
     },
 
+    async findUserById(req, res){
+        const {_id} = req.params;
+
+        const user = await User.findById(_id);
+        console.log(user)
+        res.json(user)
+    },
+
     async login(req, res){
         const {email, password} = req.body;
         const user = await User.find({ email: email});
@@ -47,17 +55,37 @@ module.exports = {
     },
 
     async updateUser(req, res){
-        
-        const {_id, name, email, password} = req.body;
-
+        const {_id} = req.params;
+        const { name, email, birthData, tellphone, genus} = req.body;
         let dataUpdate = {}
 
         dataUpdate = {
-            name, email, password
+            name, email, birthData, tellphone, genus
         }
 
-        const user = await User.findByIdAndUpdate({_id}, dataUpdate, { new: true});
-        res.json(user)
+        const user = await User.updateOne({_id}, dataUpdate, { new: true});
+        res.redirect('/')
+    },
+
+    async alterPassword(req, res){
+        const {_id} = req.params;
+        const { oldPassword, password, confirmPassword} = req.body;
+        let dataUpdate = {}
+
+        const user = await User.findById(_id);
+        console.log(user.password, password)
+        if (user.password === oldPassword && password === confirmPassword) {
+            
+            dataUpdate = user;
+            console.log(dataUpdate)
+
+            dataUpdate.password = password;
+            console.log(dataUpdate)
+            const usersalve = await User.updateOne({_id}, dataUpdate, { new: true});
+            res.redirect('/')
+        } else {
+            res.json({message: "F"})
+        }
     },
 
     async deleteUser(req, res){
