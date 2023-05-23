@@ -16,26 +16,33 @@
       <a href="#" class="navbar-brand d-flex align-items-center">
         <strong>AloCAR</strong>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <div>
+        
+        <% if (user !== null) {  %>
+          <a href=""  class="navbar-toggler">Loja</a>
+          <a href=""  class="navbar-toggler">Meus Alugueis</a>
+          <a href=""  class="navbar-toggler">Minha Conta</a>
+          <% } %>
+      </div>
     </div>
   </div>
 </header>
 <main>
 
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">AloCAR</h1>
-        <p class="lead text-body-secondary">Somos a Alocar, site focado em alocação de carro, para alugar seu carro com segurança faça o login ou crie sua conta</p>
-        <p>
-          <a href="/login" class="btn btn-primary my-2">Login</a>
-          <a href="#" class="btn btn-secondary my-2">Criar conta</a>
-        </p>
+  <% if (user === null) { %>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">AloCAR</h1>
+          <p class="lead text-body-secondary">Somos a Alocar, site focado em alocação de carro, para alugar seu carro com segurança faça o login ou crie sua conta</p>
+          <p>
+            <a href="/login" class="btn btn-primary my-2">Login</a>
+            <a href="#" class="btn btn-secondary my-2">Criar conta</a>
+          </p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <% } %>
 
   <div class="album py-5 bg-body-tertiary">
     <div class="container">

@@ -19,9 +19,7 @@ module.exports = {
         const {email, password} = req.body;
         const user = await User.find({ email: email});
 
-        console.log(user)
-
-        if(user.length !== 0){
+        if(user.length > 0 && user[0].password === password){
             res.redirect('/')
         } else{
             res.json({message: "Usuário não encontrado"}) 
