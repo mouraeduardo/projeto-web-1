@@ -7,4 +7,4 @@ const DataSchama = new mongoose.Schema({
 })
 
 const admin = mongoose.model('admin', DataSchama);
-module.exports = user;
+module.exports = admin;
